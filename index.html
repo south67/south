@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>South Collection - Redefining Modern Fashion</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+  /* RESET */
+  *, *::before, *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    line-height: 1.5;
+    transition: background 0.5s ease, color 0.5s ease;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button, input[type="submit"] {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Variables for themes */
+  :root {
+    --bg-color: #0a0a0a;
+    --text-color: #eee;
+    --primary-color: #b459f5;
+    --primary-variant: #5C6AC4;
+    --btn-bg-gradient: linear-gradient(135deg, #5C6AC4, #b459f5);
+    --btn-shadow: 0 12px 25px #b459f5cc, 0 8px 15px #5C6AC4cc;
+    --card-bg: #151515;
+    --card-shadow: 0 2px 8px #5C6AC444, 0 12px 30px #b459f533;
+    --badge-bg: #b459f5;
+    --text-muted: #999;
+    --nav-bg: rgba(18, 18, 18, 0.95);
+    --nav-shadow: 0 2px 15px rgb(86 89 197 / 0.18);
+  }
+  body.light {
+    --bg-color: #f7f7f7;
+    --text-color: #121212;
+    --primary-color: #7b3ff1;
+    --primary-variant: #6d5dfc;
+    --btn-bg-gradient: linear-gradient(135deg, #6d5dfc, #7b3ff1);
+    --btn-shadow: 0 12px 25px #7b3ff1aa, 0 8px 15px #6d5dfcaa;
+    --card-bg: #ffffff;
+    --card-shadow: 0 2px 8px #6d5dfc33, 0 12px 30px #7b3ff133;
+    --badge-bg: #7b3ff1;
+    --text-muted: #666;
+    --nav-bg: rgba(255 255 255 / 0.85);
+    --nav-shadow: 0 2px 15px rgba(123, 63, 241, 0.18);
+  }
+
+  /* Animated Background with softly moving glowing balls */
+  #animated-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background: var(--bg-color);
+    overflow: hidden;
+  }
+  .glow-ball {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(30px);
+    opacity: 0.4;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  .glow-ball:nth-child(1) {
+    width: 180px; height: 180px;
+    background: var(--primary-color);
+    top: 20%; left: 10%;
+    animation: move1 18s infinite alternate;
+  }
+  .glow-ball:nth-child(2) {
+    width: 150px; height: 150px;
+    background: var(--primary-variant);
+    top: 50%; left: 80%;
+    animation: move2 22s infinite alternate;
+  }
+  .glow-ball:nth-child(3) {
+    width: 120px; height: 120px;
+    background: var(--primary-color);
+    top: 75%; left: 30%;
+    animation: move3 20s infinite alternate;
+  }
+  .glow-ball:nth-child(4) {
+    width: 130px; height: 130px;
+    background: var(--primary-variant);
+    top: 40%; left: 50%;
+    animation: move4 24s infinite alternate;
+  }
+
+  @keyframes move1 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-30px, 50px) scale(1.1); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+  @keyframes move2 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, -20px) scale(1.1); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+  @keyframes move3 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20px, 40px) scale(1.05); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+  @keyframes move4 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-35px, -30px) scale(1.1); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+
+  /* STICKY NAVBAR */
+  nav {
+    position: sticky;
+    top: 0;
+    background: var(--nav-bg);
+    backdrop-filter: saturate(180%) blur(12px);
+    z-index: 30;
+    box-shadow: var(--nav-shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    user-select: none;
+  }
+  nav .logo {
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: var(--primary-color);
+    letter-spacing: 0.1em;
+  }
+  nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  nav ul li a {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-color);
+    padding: 6px 2px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  nav ul li a:hover,
+  nav ul li a:focus {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  #themeToggleBtn {
+    cursor: pointer;
+    border-radius: 50%;
+    background: transparent;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--primary-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: var(--primary-color);
+  }
+  #themeToggleBtn:hover,
+  #themeToggleBtn:focus {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    outline: none;
+  }
+
+  /* Smooth fadeIn sections */
+  section, header.hero {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  section.visible, header.hero.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* HERO SECTION */
+  header.hero {
+    height: 100vh;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+    color: var(--primary-color);
+  }
+  header.hero h1 {
+    font-size: clamp(3.5rem, 10vw, 6rem);
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 20px var(--primary-color);
+    margin-bottom: 0.3em;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+  header.hero p {
+    font-weight: 300;
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+    color: var(--text-color);
+    margin-bottom: 2.5em;
+    max-width: 550px;
+    letter-spacing: 0.06em;
+    user-select: none;
+  }
+  .btn-gradient {
+    padding: 1em 3.2em;
+    background: var(--btn-bg-gradient);
+    box-shadow: var(--btn-shadow);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    border-radius: 40px;
+    border: none;
+    letter-spacing: 0.1em;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(.22,1,.36,1);
+  }
+  .btn-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(270deg, var(--primary-color), var(--primary-variant), var(--primary-color));
+    background-size: 600% 600%;
+    filter: blur(20px);
+    opacity: 0.6;
+    z-index: -1;
+    animation: gradientBG 12s ease infinite;
+  }
+  @keyframes gradientBG {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+  .btn-gradient:hover,
+  .btn-gradient:focus {
+    box-shadow:
+      0 18px 40px var(--primary-variant),
+      0 16px 28px var(--primary-color);
+    transform: translateY(-5px) scale(1.05);
+  }
+
+  /* ABOUT SECTION */
+  section.about {
+    padding: 90px 20px 120px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  section.about h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 18px;
+    letter-spacing: 0.12em;
+  }
+  section.about p {
+    font-weight: 300;
+    font-size: 1.3rem;
+    color: var(--text-color);
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* FEATURED COLLECTION */
+  section.featured {
+    padding: 60px 20px 120px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  section.featured h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    text-align: center;
+    letter-spacing: 0.12em;
+  }
+  .featured-grid {
+    display: grid;
+    gap: 35px;
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  .featured-main {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--card-bg);
+    box-shadow:
+      0 4px 18px var(--primary-color + 44),
+      0 15px 40px var(--primary-variant + 33);
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+  .featured-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4/5;
+    transition: transform 0.6s ease;
+    will-change: transform;
+    border-radius: 18px;
+  }
+  .featured-main:hover img {
+    transform: scale(1.1);
+  }
+  .featured-main-info {
+    position: absolute;
+    bottom: 20px; left: 20px;
+    color: var(--primary-color);
+    text-shadow: 0 0 15px var(--primary-color + aa);
+  }
+  .featured-main-info h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.3em;
+  }
+  .featured-main-info p {
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  .featured-side {
+    display: grid;
+    gap: 28px;
+  }
+  .featured-side .featured-card {
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--card-bg);
+    box-shadow:
+      0 2px 10px var(--primary-color + 33),
+      0 10px 30px var(--primary-variant + 22);
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+  .featured-side .featured-card img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    will-change: transform;
+    border-radius: 18px;
+  }
+  .featured-side .featured-card:hover {
+    transform: translateY(-8px) scale(1.03);
+  }
+  .featured-side .featured-card:hover img {
+    transform: scale(1.1);
+  }
+
+  /* PRODUCTS SECTION */
+  section.products {
+    max-width: 1200px;
+    margin: 0 auto 120px;
+    padding: 0 20px;
+  }
+  section.products h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 28px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 30px;
+  }
+  .product-card {
+    background: var(--card-bg);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    position: relative;
+  }
+  .product-card:hover {
+    transform: translateY(-14px) scale(1.07);
+    box-shadow:
+      0 8px 20px var(--primary-variant + BB),
+      0 20px 38px var(--primary-color + 77);
+  }
+  .product-image {
+    flex-grow: 1;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    overflow: hidden;
+  }
+  .product-image img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    will-change: transform;
+  }
+  .product-card:hover .product-image img {
+    transform: scale(1.14);
+  }
+  .product-info {
+    padding: 18px 20px 26px;
+    color: var(--text-color);
+  }
+  .product-info .product-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .product-info .product-price {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+  }
+  .badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--badge-bg);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 10px var(--primary-color + aa);
+    user-select: none;
+  }
+
+  /* NEW ARRIVALS + BEST SELLERS */
+  .highlight-section {
+    margin-top: 40px;
+    margin-bottom: 60px;
+  }
+  .highlight-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 18px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .highlight-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scroll-padding-left: 20px;
+  }
+  .highlight-row::-webkit-scrollbar {
+    height: 7px;
+  }
+  .highlight-row::-webkit-scrollbar-thumb {
+    background: var(--primary-color + cc);
+    border-radius: 8px;
+  }
+  .highlight-row::-webkit-scrollbar-track {
+    background: var(--bg-color);
+  }
+  .highlight-card {
+    min-width: 180px;
+    flex-shrink: 0;
+    background: var(--card-bg);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+      0 2px 12px var(--primary-color + 33),
+      0 8px 24px var(--primary-variant + 22);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+  .highlight-card:hover {
+    transform: translateY(-10px);
+    box-shadow:
+      0 5px 25px var(--primary-color + 88),
+      0 12px 38px var(--primary-variant + 99);
+  }
+  .highlight-card img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    border-radius: 14px;
+  }
+  .highlight-card:hover img {
+    transform: scale(1.12);
+  }
+  .highlight-info {
+    padding: 12px 12px 18px;
+    color: var(--text-color);
+  }
+  .highlight-info .name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .highlight-info .price {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--primary-color + aa);
+  }
+
+  /* GALLERY SECTION */
+  section.gallery {
+    max-width: 1200px;
+    margin: 60px auto 100px;
+    padding: 0 20px;
+  }
+  section.gallery h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 32px;
+    text-align: center;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px, 1fr));
+    gap: 22px;
+  }
+  .gallery-item {
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+      0 2px 12px var(--primary-color + 22),
+      0 10px 30px var(--primary-variant + 11);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .gallery-item:hover {
+    transform: scale(1.07);
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    transition: filter 0.4s ease;
+    border-radius: 14px;
+  }
+  .gallery-item:hover img {
+    filter: brightness(1.1);
+  }
+
+  /* TESTIMONIALS */
+  section.testimonials {
+    max-width: 900px;
+    margin: 80px auto 100px;
+    padding: 0 20px;
+    color: var(--text-color);
+    user-select: none;
+  }
+  section.testimonials h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+  }
+  .slider {
+    position: relative;
+    overflow: hidden;
+  }
+  .slides {
+    display: flex;
+    transition: transform 0.8s cubic-bezier(.36,.07,.19,.97);
+  }
+  .testimonial {
+    min-width: 100%;
+    padding: 20px 30px;
+    background: var(--card-bg);
+    border-radius: 18px;
+    box-shadow:
+      0 4px 15px var(--primary-color + 55);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .testimonial p {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
+    color: #ccc;
+  }
+  .testimonial .author {
+    margin-top: auto;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--primary-color + cc);
+    align-self: flex-end;
+  }
+  /* slider controls */
+  .slider-controls {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+  }
+  .slider-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--primary-variant + bb);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .slider-dot.active {
+    background: var(--primary-color);
+  }
+
+  /* NEWSLETTER */
+  section.newsletter {
+    background: var(--card-bg);
+    max-width: 700px;
+    margin: 0 auto 100px;
+    padding: 50px 20px 60px;
+    border-radius: 18px;
+    box-shadow:
+      0 10px 35px var(--primary-color + 22);
+    text-align: center;
+  }
+  section.newsletter h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    letter-spacing: 0.12em;
+  }
+  section.newsletter p {
+    font-weight: 300;
+    color: var(--text-color);
+    font-size: 1.15rem;
+    margin-bottom: 30px;
+  }
+  form.newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  input[type="email"] {
+    padding: 14px 18px;
+    border-radius: 40px;
+    border: none;
+    font-weight: 400;
+    font-size: 1rem;
+    width: 280px;
+    max-width: 100%;
+    outline-offset: 3px;
+    outline-color: var(--primary-color + aa);
+    background: #222222;
+    color: var(--text-color);
+    transition: outline-color 0.3s ease;
+  }
+  input[type="email"]:focus {
+    outline-color: var(--primary-color + dd);
+  }
+  input::placeholder {
+    color: var(--text-muted);
+  }
+  input[type="submit"] {
+    background: var(--btn-bg-gradient);
+    color: white;
+    padding: 14px 32px;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 40px;
+    box-shadow:
+      0 8px 22px var(--primary-color + bb);
+    transition: box-shadow 0.3s ease;
+    user-select: none;
+  }
+  input[type="submit"]:hover,
+  input[type="submit"]:focus {
+    box-shadow:
+      0 14px 32px var(--primary-variant + dd);
+    transform: translateY(-3px);
+  }
+
+  /* CONTACT SECTION */
+  section.contact {
+    max-width: 600px;
+    margin: 0 auto 80px;
+    padding: 0 20px 80px;
+    text-align: center;
+  }
+  section.contact h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 18px;
+  }
+  section.contact p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+  }
+  section.contact p strong {
+    color: var(--primary-color);
+  }
+  .contact-link {
+    color: var(--primary-variant);
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  .contact-link:hover,
+  .contact-link:focus {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--card-bg);
+    border-top: 1px solid #2c2c2c;
+    color: var(--text-muted);
+    user-select: none;
+  }
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  footer .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--primary-color);
+  }
+  footer nav {
+    margin: 12px 0;
+  }
+  footer nav ul {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  footer nav ul li a {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  footer nav ul li a:hover,
+  footer nav ul li a:focus {
+    color: var(--primary-color);
+  }
+  .social-icons {
+    display: flex;
+    gap: 18px;
+  }
+  .social-icons a {
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+    font-size: 1.5rem;
+  }
+  .social-icons a:hover,
+  .social-icons a:focus {
+    color: var(--primary-color);
+  }
+
+  /* WHATSAPP FLOAT BUTTON */
+  #whatsapp-btn {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    background: #25d366;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    box-shadow: 0 6px 15px #25d366cc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    z-index: 9999;
+  }
+  #whatsapp-btn:hover {
+    box-shadow: 0 10px 24px #25d366ff;
+    transform: scale(1.1);
+  }
+  #whatsapp-btn svg {
+    fill: white;
+    width: 28px;
+    height: 28px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    .featured-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 600px) {
+    nav ul {
+      gap: 16px;
+    }
+    nav {
+      padding: 15px 20px;
+    }
+    header.hero h1 {
+      font-size: 3.5rem;
+    }
+    header.hero p {
+      font-size: 1.2rem;
+      max-width: 90vw;
+    }
+    .featured-grid {
+      grid-template-columns: 1fr;
+    }
+    section.products {
+      margin-bottom: 80px;
+    }
+    section.products h2 {
+      font-size: 2.2rem;
+    }
+    .highlight-row {
+      gap: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    footer .footer-container {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<div id="animated-bg" aria-hidden="true" aria-label="Animated glowing background">
+  <div class="glow-ball"></div>
+  <div class="glow-ball"></div>
+  <div class="glow-ball"></div>
+  <div class="glow-ball"></div>
+</div>
+
+<nav role="navigation" aria-label="Primary navigation">
+  <div class="logo" tabindex="0" aria-current="page">South Collection</div>
+  <ul>
+    <li><a href="#hero" tabindex="0">Home</a></li>
+    <li><a href="#about" tabindex="0">About</a></li>
+    <li><a href="#products" tabindex="0">Products</a></li>
+    <li><a href="#contact" tabindex="0">Contact</a></li>
+  </ul>
+  <button id="themeToggleBtn" aria-label="Toggle Dark/Light theme" title="Toggle theme" tabindex="0">🌓</button>
+</nav>
+
+<header class="hero" id="hero" role="banner" tabindex="0">
+  <h1>South Collection</h1>
+  <p>Redefining Modern Fashion</p>
+  <button class="btn-gradient" aria-label="Shop Now, scroll to products" id="shopNowBtn">Shop Now</button>
+</header>
+
+<section class="about" id="about" role="region" aria-labelledby="aboutTitle" tabindex="0">
+  <h2 id="aboutTitle">About Us</h2>
+  <p>South Collection is a premium fashion brand dedicated to redefining modern wardrobes through sophisticated, powerful design and unparalleled craftsmanship. Our ethos embraces bold style, luxurious quality, and visionary aesthetics for the fashion-forward individual seeking excellence.</p>
+</section>
+
+<section class="featured" aria-labelledby="featuredTitle" tabindex="0">
+  <h2 id="featuredTitle">Featured Collection</h2>
+  <div class="featured-grid">
+    <div class="featured-main" tabindex="0" aria-label="Featured Black Modern Coat">
+      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=90" alt="Black Modern Coat" loading="lazy" />
+      <div class="featured-main-info">
+        <h3>Black Modern Coat</h3>
+        <p>$310</p>
+      </div>
+    </div>
+    <div class="featured-side">
+      <div class="featured-card" tabindex="0" aria-label="Featured White Silk Blouse">
+        <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=90" alt="White Silk Blouse" loading="lazy" />
+      </div>
+      <div class="featured-card" tabindex="0" aria-label="Featured Trendy Sneakers">
+        <img src="https://images.unsplash.com/photo-1542293787938-c9e299b880f1?auto=format&fit=crop&w=600&q=90" alt="Trendy Sneakers" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="products" id="products" role="region" aria-labelledby="productsTitle" tabindex="0">
+  <h2 id="productsTitle">Our Products</h2>
+
+  <!-- New Arrivals -->
+  <div class="highlight-section" aria-label="New Arrivals">
+    <h3 class="highlight-heading">New Arrivals</h3>
+    <div class="highlight-row" tabindex="0">
+      <div class="highlight-card" aria-label="New Hoodie Blue for $80" tabindex="0" style="position: relative;">
+        <span class="badge">New</span>
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=90" alt="Blue Hoodie"/>
+        <div class="highlight-info">
+          <div class="name">Blue Hoodie</div>
+          <div class="price">$80</div>
+        </div>
+      </div>
+      <div class="highlight-card" aria-label="New Black Cap for $30" tabindex="0" style="position: relative;">
+        <span class="badge">New</span>
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=90" alt="Black Cap"/>
+        <div class="highlight-info">
+          <div class="name">Black Cap</div>
+          <div class="price">$30</div>
+        </div>
+      </div>
+      <div class="highlight-card" aria-label="New White T-Shirt for $45" tabindex="0" style="position: relative;">
+        <span class="badge">New</span>
+        <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=600&q=90" alt="White T-Shirt"/>
+        <div class="highlight-info">
+          <div class="name">White T-Shirt</div>
+          <div class="price">$45</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Best Sellers -->
+  <div class="highlight-section" aria-label="Best Sellers">
+    <h3 class="highlight-heading">Best Sellers</h3>
+    <div class="highlight-row" tabindex="0">
+      <div class="highlight-card" aria-label="Hot Black Leather Jacket for $200" tabindex="0" style="position: relative;">
+        <span class="badge" style="background:#ff3e3e;">Hot</span>
+        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=90" alt="Black Leather Jacket" />
+        <div class="highlight-info">
+          <div class="name">Black Leather Jacket</div>
+          <div class="price">$200</div>
+        </div>
+      </div>
+      <div class="highlight-card" aria-label="Hot Glossy White Sneakers for $130" tabindex="0" style="position: relative;">
+        <span class="badge" style="background:#ff3e3e;">Hot</span>
+        <img src="https://images.unsplash.com/photo-1519741491935-3b46a6b5cf78?auto=format&fit=crop&w=600&q=90" alt="Glossy White Sneakers"/>
+        <div class="highlight-info">
+          <div class="name">Glossy White Sneakers</div>
+          <div class="price">$130</div>
+        </div>
+      </div>
+      <div class="highlight-card" aria-label="Hot Grey Hoodie for $95" tabindex="0" style="position: relative;">
+        <span class="badge" style="background:#ff3e3e;">Hot</span>
+        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=90" alt="Grey Hoodie"/>
+        <div class="highlight-info">
+          <div class="name">Grey Hoodie</div>
+          <div class="price">$95</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="product-grid" aria-label="Product Grid">
+    <article class="product-card" tabindex="0" aria-label="Hoodie - Soft fleece hoodie for $75" style="position: relative;">
+      <img src="https://images.unsplash.com/photo-1602810312905-02f62d67e166?auto=format&fit=crop&w=600&q=80" alt="Black Soft Fleece Hoodie" loading="lazy" />
+      <div class="product-info">
+        <div class="product-name">Black Soft Fleece Hoodie</div>
+        <div class="product-price">$75</div>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-label="T-Shirt - Modern slim-fit white t-shirt for $40" style="position: relative;">
+      <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b4?auto=format&fit=crop&w=600&q=80" alt="White Slim Fit T-Shirt" loading="lazy" />
+      <div class="product-info">
+        <div class="product-name">White Slim Fit T-Shirt</div>
+        <div class="product-price">$40</div>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-label="Jacket - Sleek black leather jacket for $180" style="position: relative;">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Black Leather Jacket" loading="lazy" />
+      <div class="product-info">
+        <div class="product-name">Black Leather Jacket</div>
+        <div class="product-price">$180</div>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-label="Sneakers - Premium white sneakers for $120" style="position: relative;">
+      <img src="https://images.unsplash.com/photo-1552346154-f42fd504ae9b?auto=format&fit=crop&w=600&q=80" alt="Glossy White Sneakers" loading="lazy" />
+      <div class="product-info">
+        <div class="product-name">Glossy White Sneakers</div>
+        <div class="product-price">$120</div>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-label="Cap - Stylish grey cap for $25" style="position: relative;">
+      <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=600&q=80" alt="Stylish Grey Cap" loading="lazy" />
+      <div class="product-info">
+        <div class="product-name">Stylish Grey Cap</div>
+        <div class="product-price">$25</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="gallery" aria-labelledby="galleryTitle" tabindex="0">
+  <h2 id="galleryTitle">Lifestyle Gallery</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Fashion Model Outdoor"/>
+    </div>
+    <div class="gallery-item" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1520975699235-2abd81fe8d72?auto=format&fit=crop&w=600&q=90" alt="Urban Fashion Street"/>
+    </div>
+    <div class="gallery-item" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=90" alt="Woman in Luxury Coat"/>
+    </div>
+    <div class="gallery-item" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?auto=format&fit=crop&w=600&q=90" alt="Elegant Fashion Detail"/>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" aria-labelledby="testimonialsTitle" tabindex="0">
+  <h2 id="testimonialsTitle">What Our Customers Say</h2>
+  
+  <div class="slider" aria-live="polite">
+    <div class="slides">
+      <blockquote class="testimonial" tabindex="0">
+        <p>"South Collection elevated my wardrobe beyond expectations. The quality &amp; style are unmatched, making every piece a statement."</p>
+        <footer class="author">- Emily R.</footer>
+      </blockquote>
+      <blockquote class="testimonial" tabindex="0">
+        <p>"I love the flawless fit and luxury feel. Shopping here is an experience that matches the high-end look I want."</p>
+        <footer class="author">- Michael T.</footer>
+      </blockquote>
+      <blockquote class="testimonial" tabindex="0">
+        <p>"Fashion-forward and premium quality. South Collection combines innovation and timeless style perfectly."</p>
+        <footer class="author">- Sophia K.</footer>
+      </blockquote>
+    </div>
+  </div>
+  <div class="slider-controls" role="tablist" aria-label="Testimonials navigation">
+    <button class="slider-dot active" aria-label="Testimonial 1" aria-selected="true" role="tab" tabindex="0"></button>
+    <button class="slider-dot" aria-label="Testimonial 2" aria-selected="false" role="tab" tabindex="-1"></button>
+    <button class="slider-dot" aria-label="Testimonial 3" aria-selected="false" role="tab" tabindex="-1"></button>
+  </div>
+</section>
+
+<section class="newsletter" aria-labelledby="newsletterTitle" tabindex="0">
+  <h2 id="newsletterTitle">Stay in Touch</h2>
+  <p>Join our newsletter for exclusive previews, sales &amp; fashion insights from South Collection.</p>
+  <form class="newsletter-form" action="#" method="post" role="form" aria-label="Newsletter subscription form">
+    <input type="email" name="email" placeholder="Your email address" required aria-required="true" aria-label="Email Address" />
+    <input type="submit" value="Subscribe" aria-label="Subscribe to newsletter" />
+  </form>
+</section>
+
+<section class="contact" id="contact" role="contentinfo" aria-labelledby="contactTitle" tabindex="0">
+  <h2 id="contactTitle">Contact Us</h2>
+  <p><strong>Phone:</strong> <a href="tel:+0617571096" class="contact-link" aria-label="Call 0617571096">0617571096</a></p>
+  <p><strong>Email:</strong> <a href="mailto:khatibahmad257@gmail.com" class="contact-link" aria-label="Email khatibahmad257@gmail.com">khatibahmad257@gmail.com</a></p>
+</section>
+
+<footer role="contentinfo" aria-label="Site Footer">
+  <div class="footer-container">
+    <div class="logo">South Collection</div>
+    <nav aria-label="Footer navigation">
+      <ul>
+        <li><a href="#hero" tabindex="0">Home</a></li>
+        <li><a href="#about" tabindex="0">About</a></li>
+        <li><a href="#products" tabindex="0">Products</a></li>
+        <li><a href="#contact" tabindex="0">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="social-icons" aria-label="Social media links">
+      <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" tabindex="0" title="Facebook" aria-hidden="false" >
+        <svg aria-hidden="true" focusable="false" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.875v-6.986h-2.7v-2.89h2.7v-2.2c0-2.676 1.59-4.15 4.03-4.15 1.165 0 2.38.208 2.38.208v2.6h-1.33c-1.31 0-1.72.815-1.72 1.65v2h2.93l-.47 2.89h-2.46v6.987A10.003 10.003 0 0022 12z"/></svg>
+      </a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" tabindex="0" title="Instagram" aria-hidden="false">
+        <svg aria-hidden="true" focusable="false" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.625 2a1.125 1.125 0 110 2.25 1.125 1.125 0 010-2.25zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/></svg>
+      </a>
+      <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter" tabindex="0" title="Twitter" aria-hidden="false">
+        <svg aria-hidden="true" focusable="false" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0022.4.36a9.07 9.07 0 01-2.88 1.12A4.47 4.47 0 0016.11.24c-2.41 0-4.37 1.94-4.37 4.33 0 .34.04.67.1.99-3.62-.18-6.83-1.96-8.98-4.63a4.5 4.5 0 00-.59 2.17c0 1.5.78 2.83 1.98 3.6a4.42 4.42 0 01-2-.56v.05c0 2.09 1.5 3.85 3.48 4.24a4.44 4.44 0 01-2 .08 4.39 4.39 0 004.08 3 9.04 9.04 0 01-5.5 1.9c-.36 0-.7-.02-1.04-.07a12.67 12.67 0 006.88 2.19c8.25 0 12.77-6.94 12.77-12.95l-.02-.59A9.18 9.18 0 0023 3z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Order Button -->
+<a href="https://wa.me/0617571096" target="_blank" rel="noopener" aria-label="Order via WhatsApp" id="whatsapp-btn" role="button" tabindex="0">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M380.9 97.1C339-6.1 239.3-25.6 162.7 31.7 92.7 84.6 67.4 164.8 92 239.7l-38 103.4 109.2-35.6c17.8 9.7 37.9 14.7 57.9 14.1 70.6-2 126.8-62.6 126.6-133.8-.2-38.2-16.6-75.3-67.8-110.7zm-89.6 232.1c-21.1 0-41.8-6.4-59.4-18.5l-4.6-2.9-64.8 21.1 20-63.3-3-4.9c-13.8-22.7-20.5-48.7-19.5-74.8 1.4-49 42.3-86.3 91-75.6 24.6 5.4 45 23.9 54.1 46.3 24.6 46.8 1.7 108.2-36.8 98.9z"/></svg>
+</a>
+
+<script>
+  // Fade in sections on scroll
+  function revealSections() {
+    document.querySelectorAll('section, header.hero').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', revealSections);
+  window.addEventListener('load', revealSections);
+
+  // Smooth scroll for Shop Now button
+  document.getElementById('shopNowBtn').addEventListener('click', () => {
+    document.getElementById('products').scrollIntoView({behavior: 'smooth'});
+  });
+
+  // Testimonials slider logic
+  const slides = document.querySelector('.slides');
+  const dots = document.querySelectorAll('.slider-dot');
+  let currentSlide = 0;
+  const totalSlides = dots.length;
+
+  function setSlide(index) {
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+    slides.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+      dot.setAttribute('aria-selected', i === index);
+      dot.tabIndex = (i === index) ? 0 : -1;
+    });
+    currentSlide = index;
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => setSlide(i));
+    dot.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') setSlide(currentSlide + 1);
+      else if (e.key === 'ArrowLeft') setSlide(currentSlide - 1);
+    });
+  });
+
+  setSlide(0);
+  setInterval(() => setSlide(currentSlide + 1), 7000);
+
+  // Theme toggle button
+  const themeBtn = document.getElementById('themeToggleBtn');
+  themeBtn.addEventListener('click', () => {
+    if (document.body.classList.contains('light')) {
+      document.body.classList.remove('light');
+      localStorage.setItem('theme', 'dark');
+      themeBtn.textContent = '🌓';
+    } else {
+      document.body.classList.add('light');
+      localStorage.setItem('theme', 'light');
+      themeBtn.textContent = '🌙';
+    }
+  });
+
+  // Load theme from storage
+  window.addEventListener('load', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme === 'light'){
+      document.body.classList.add('light');
+      themeBtn.textContent = '🌙';
+    }
+  });
+</script>
+
+</body>
+</html>
